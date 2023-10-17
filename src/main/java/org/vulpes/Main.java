@@ -21,9 +21,15 @@ public class Main {
                     .fillPassword("zaq1@WSXcde3")
                     .clickLoginButton()
                     .openLastPlayed()
-                    .collectResourceData();
+                    .collectResourceData()
+                    .openResources()
+                    .collectResourceBuildingLevels()
+                    .openFacilities()
+                    .collectFacilitiesBuildingLevels()
+                    .listUpgradeable()
+                            .forEach(System.out::println);
 
-            System.out.println(GameDataSingleton.deuter);
+            System.out.println(GameDataSingleton.buildingLevels.get("researchLaboratory"));
         }
     }
 }

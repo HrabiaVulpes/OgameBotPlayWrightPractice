@@ -9,9 +9,9 @@ public class GamePage extends BasePage{
         super(page);
     }
 
-    public GamePage openResources(){
+    public ResourcesPage openResources(){
         page.getByText("Surowce").click();
-        return this;
+        return new ResourcesPage(page);
     }
 
     public GamePage openLifeforms(){
@@ -19,9 +19,9 @@ public class GamePage extends BasePage{
         return this;
     }
 
-    public GamePage openFacilities(){
+    public FacilitiesPage openFacilities(){
         page.getByText("Stacja").click();
-        return this;
+        return new FacilitiesPage(page);
     }
 
     public GamePage openTrader(){
@@ -95,7 +95,7 @@ public class GamePage extends BasePage{
                 .first()
                 .getAttribute("data-raw"));
 
-        GameDataSingleton.power = Integer.parseInt(page.locator("#resources_food")
+        GameDataSingleton.food = Integer.parseInt(page.locator("#resources_food")
                 .first()
                 .getAttribute("data-raw")
                 .split("\\.")[0]
