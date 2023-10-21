@@ -29,9 +29,9 @@ public class GamePage extends BasePage{
         return this;
     }
 
-    public GamePage openResearch(){
+    public ResearchPage openResearch(){
         page.getByText("Badania").click();
-        return this;
+        return new ResearchPage(page);
     }
 
     public GamePage openShipyard(){
@@ -92,8 +92,10 @@ public class GamePage extends BasePage{
                 .getAttribute("data-raw"));
 
         GameDataSingleton.population = Integer.parseInt(page.locator("#resources_population")
-                .first()
-                .getAttribute("data-raw"));
+                        .first()
+                        .getAttribute("data-raw")
+                        .split("\\.")[0]
+        );
 
         GameDataSingleton.food = Integer.parseInt(page.locator("#resources_food")
                 .first()

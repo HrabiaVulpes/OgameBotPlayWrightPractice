@@ -25,7 +25,7 @@ public class FacilitiesPage extends GamePage{
     }
 
     public List<String> listUpgradeable(){
-        return page.locator("#producers").locator("li").all()
+        return page.locator("#technologies").locator("li").all()
                 .stream()
                 .filter(element -> element.locator("button.upgrade").isVisible())
                 .map(element -> {

@@ -24,12 +24,12 @@ public class Main {
                     .collectResourceData()
                     .openResources()
                     .collectResourceBuildingLevels()
+                    .openResearch()
+                    .collectResearchLevels()
                     .openFacilities()
-                    .collectFacilitiesBuildingLevels()
-                    .listUpgradeable()
-                            .forEach(System.out::println);
+                    .collectFacilitiesBuildingLevels();
 
-            System.out.println(GameDataSingleton.buildingLevels.get("researchLaboratory"));
+            System.out.println("Shield tech is: " + GameDataSingleton.techLevels.get("shieldingTechnology"));
         }
     }
 }
