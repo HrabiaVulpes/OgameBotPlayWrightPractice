@@ -44,9 +44,9 @@ public class GamePage extends BasePage{
         return this;
     }
 
-    public GamePage openFleet(){
+    public FleetPage openFleet(){
         page.getByText("Flota").click();
-        return this;
+        return new FleetPage(page);
     }
 
     public GamePage openGalaxy(){

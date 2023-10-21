@@ -16,4 +16,11 @@ public class GameDataSingleton {
     public static Map<String, Integer> techLevels = new HashMap<>();
     public static Map<String, Integer> shipCounts = new HashMap<>();
     public static Map<String, Integer> defencesCounts = new HashMap<>();
+
+    public static Integer fleetsActive;
+    public static Integer maxFleetsActive;
+
+    public static Integer expeditionsActive;
+    public static Integer maxExpeditionsActive;
+
 }

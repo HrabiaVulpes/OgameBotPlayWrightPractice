@@ -27,9 +27,11 @@ public class Main {
                     .openResearch()
                     .collectResearchLevels()
                     .openFacilities()
-                    .collectFacilitiesBuildingLevels();
+                    .collectFacilitiesBuildingLevels()
+                    .openFleet()
+                    .collectFleetNumbers();
 
-            System.out.println("Shield tech is: " + GameDataSingleton.techLevels.get("shieldingTechnology"));
+            System.out.println("Can send fleets:: " + (GameDataSingleton.maxFleetsActive - GameDataSingleton.fleetsActive));
         }
     }
 }
