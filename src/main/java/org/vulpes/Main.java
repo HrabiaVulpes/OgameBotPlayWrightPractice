@@ -6,6 +6,7 @@ import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Playwright;
 import org.vulpes.game.GameDataSingleton;
 import org.vulpes.pages.EntryPage;
+import org.vulpes.pages.GamePage;
 
 
 public class Main {
@@ -29,9 +30,15 @@ public class Main {
                     .openFacilities()
                     .collectFacilitiesBuildingLevels()
                     .openFleet()
-                    .collectFleetNumbers();
+                    .collectFleetNumbers()
+                    .openDefences()
+                    .collectDefencesCounts()
+                    .openFleet()
+                    .sendAllExpeditions();
 
-            System.out.println("Can send fleets:: " + (GameDataSingleton.maxFleetsActive - GameDataSingleton.fleetsActive));
+
+            System.out.println(GameDataSingleton.fleetsActive + " " + GameDataSingleton.maxFleetsActive);
+            System.out.println(GameDataSingleton.expeditionsActive + " " + GameDataSingleton.maxExpeditionsActive);
         }
     }
 }

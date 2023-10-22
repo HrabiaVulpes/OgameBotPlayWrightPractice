@@ -39,9 +39,9 @@ public class GamePage extends BasePage{
         return this;
     }
 
-    public GamePage openDefences(){
+    public DefencesPage openDefences(){
         page.getByText("Obrona").click();
-        return this;
+        return new DefencesPage(page);
     }
 
     public FleetPage openFleet(){
