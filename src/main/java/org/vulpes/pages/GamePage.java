@@ -35,7 +35,7 @@ public class GamePage extends BasePage{
     }
 
     public ResearchPage openResearch(){
-        page.getByText("Badania").click();
+        page.getByText("Badania").and(page.locator("span.textlabel")).click();
         return new ResearchPage(page);
     }
 

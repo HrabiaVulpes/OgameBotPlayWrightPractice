@@ -5,9 +5,9 @@ import com.microsoft.playwright.BrowserType;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Playwright;
 import org.vulpes.game.GameDataSingleton;
+import org.vulpes.game.PlayerSettingsSingleton;
 import org.vulpes.pages.EntryPage;
 import org.vulpes.pages.OverviewPage;
-import org.vulpes.pages.ResourcesPage;
 
 
 public class Main {
@@ -17,34 +17,30 @@ public class Main {
                 Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false).setSlowMo(100));
                 Page page = browser.newPage();
                 EntryPage entryPage = new EntryPage(page);
-                OverviewPage resp = entryPage.open()
+                OverviewPage current = entryPage.open()
                         .acceptCookies()
                         .clickOnLoginTab()
-                        .fillEmail("hrabiavulpes@gmail.com")
-                        .fillPassword("zaq1@WSXcde3")
+                        .fillEmail(PlayerSettingsSingleton.eMail)
+                        .fillPassword(PlayerSettingsSingleton.pass)
                         .clickLoginButton()
                         .openLastPlayed()
                         .collectResourceData()
-                        .openResources()
-                        .collectResourceBuildingLevels()
-                        .openResearch()
-                        .collectResearchLevels()
-                        .openFacilities()
-                        .collectFacilitiesBuildingLevels()
-                        .openDefences()
-                        .collectDefencesCounts()
                         .openFleet()
                         .collectFleetNumbers()
                         .sendAllExpeditions()
-                        .openResearch()
                         .collectResourceData()
                         .openOverview();
 
-                System.out.println("Builds? " + resp.isConstructing());
-                System.out.println("BuildsLF? " + resp.isConstructingLifeforms());
-                System.out.println("Researches? " + resp.isResearching());
-                System.out.println("ResearchesLF? " + resp.isResearchingLifeforms());
-                System.out.println("Produces? " + resp.isProducing());
+                if (!current.isResearching())
+                    current.openResearch().upgradeLowestUsable().openOverview();
+                if (!current.isConstructing())
+                    current.openDefences().constructNeeded().openOverview();
+
+                System.out.println("Builds? " + current.isConstructing());
+                System.out.println("BuildsLF? " + current.isConstructingLifeforms());
+                System.out.println("Researches? " + current.isResearching());
+                System.out.println("ResearchesLF? " + current.isResearchingLifeforms());
+                System.out.println("Produces? " + current.isProducing());
                 System.out.println("Resources are: " + GameDataSingleton.metal + " " + GameDataSingleton.crystal + " " + GameDataSingleton.deuter);
             }
 
