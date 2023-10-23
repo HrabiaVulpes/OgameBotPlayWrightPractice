@@ -12,6 +12,7 @@ public class DefencesPage extends GamePage {
     }
 
     public DefencesPage collectDefencesCounts(){
+        GameDataSingleton.defencesCounts.clear();
         GameDataSingleton.defencesCounts.put("rocketLauncher", Integer.parseInt(page.locator("span.rocketLauncher > span.amount").first().textContent()));
         GameDataSingleton.defencesCounts.put("laserCannonLight", Integer.parseInt(page.locator("span.laserCannonLight > span.amount").first().textContent()));
         GameDataSingleton.defencesCounts.put("laserCannonHeavy", Integer.parseInt(page.locator("span.laserCannonHeavy > span.amount").first().textContent()));

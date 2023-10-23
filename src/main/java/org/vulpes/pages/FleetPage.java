@@ -9,6 +9,7 @@ public class FleetPage extends GamePage {
     }
 
     public FleetPage collectFleetNumbers() {
+        GameDataSingleton.shipCounts.clear();
         GameDataSingleton.shipCounts.put("fighterLight", Integer.parseInt(page.locator("span.fighterLight > span.amount").first().getAttribute("data-value")));
         GameDataSingleton.shipCounts.put("fighterHeavy", Integer.parseInt(page.locator("span.fighterHeavy > span.amount").first().getAttribute("data-value")));
         GameDataSingleton.shipCounts.put("cruiser", Integer.parseInt(page.locator("span.cruiser > span.amount").first().getAttribute("data-value")));
@@ -46,12 +47,15 @@ public class FleetPage extends GamePage {
     }
 
     public FleetPage sendExpedition() {
+        collectFleetNumbers();
         int moreExpeditions = GameDataSingleton.maxExpeditionsActive - GameDataSingleton.expeditionsActive;
         if (moreExpeditions > 0) {
             if (GameDataSingleton.shipCounts.get("espionageProbe") > 0) selectShips("espionageProbe", 1);
             if (GameDataSingleton.shipCounts.get("explorer") > 0) selectShips("explorer", 1);
-            if (GameDataSingleton.shipCounts.get("transporterSmall") > 0) selectShips("transporterSmall", GameDataSingleton.shipCounts.get("transporterSmall")/moreExpeditions);
-            if (GameDataSingleton.shipCounts.get("transporterLarge") > 0) selectShips("transporterLarge", GameDataSingleton.shipCounts.get("transporterLarge")/moreExpeditions);
+            if (GameDataSingleton.shipCounts.get("transporterSmall") > 0)
+                selectShips("transporterSmall", GameDataSingleton.shipCounts.get("transporterSmall") / moreExpeditions);
+            if (GameDataSingleton.shipCounts.get("transporterLarge") > 0)
+                selectShips("transporterLarge", GameDataSingleton.shipCounts.get("transporterLarge") / moreExpeditions);
 
             if (GameDataSingleton.shipCounts.get("destroyer") > 0) selectShips("destroyer", 1);
             else if (GameDataSingleton.shipCounts.get("bomber") > 0) selectShips("bomber", 1);
@@ -62,19 +66,16 @@ public class FleetPage extends GamePage {
             else if (GameDataSingleton.shipCounts.get("fighterLight") > 0) selectShips("fighterLight", 1);
 
             FleetSendPage fsp = sendShips();
-            fsp.useCoordinates(2,425,16)
+            fsp.useCoordinates(2, 425, 16)
                     .pickMission("Ekspedycja")
                     .send();
         }
         return this;
     }
 
-    public FleetPage sendAllExpeditions(){
-        collectFleetNumbers();
-        while (GameDataSingleton.expeditionsActive < GameDataSingleton.maxExpeditionsActive) {
+    public FleetPage sendAllExpeditions() {
+        for (int i = GameDataSingleton.expeditionsActive; i < GameDataSingleton.maxExpeditionsActive; i++)
             sendExpedition();
-            collectFleetNumbers();
-        }
         return this;
     }
 }

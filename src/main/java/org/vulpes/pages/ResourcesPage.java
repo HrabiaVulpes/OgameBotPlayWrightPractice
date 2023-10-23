@@ -13,6 +13,7 @@ public class ResourcesPage extends GamePage{
     }
 
     public ResourcesPage collectResourceBuildingLevels(){
+        GameDataSingleton.buildingLevels.clear();
         GameDataSingleton.buildingLevels.put("metalMine", Integer.parseInt(page.locator("span.metalMine > span.level > span").first().textContent()));
         GameDataSingleton.buildingLevels.put("crystalMine", Integer.parseInt(page.locator("span.crystalMine > span.level > span").first().textContent()));
         GameDataSingleton.buildingLevels.put("deuteriumSynthesizer", Integer.parseInt(page.locator("span.deuteriumSynthesizer > span.level > span").first().textContent()));

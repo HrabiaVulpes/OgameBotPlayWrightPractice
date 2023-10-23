@@ -12,6 +12,7 @@ public class ResearchPage extends GamePage{
     }
 
     public ResearchPage collectResearchLevels(){
+        GameDataSingleton.techLevels.clear();
         GameDataSingleton.techLevels.put("energyTechnology", Integer.parseInt(page.locator("span.energyTechnology > span.level > span").first().textContent()));
         GameDataSingleton.techLevels.put("laserTechnology", Integer.parseInt(page.locator("span.laserTechnology > span.level > span").first().textContent()));
         GameDataSingleton.techLevels.put("ionTechnology", Integer.parseInt(page.locator("span.ionTechnology > span.level > span").first().textContent()));

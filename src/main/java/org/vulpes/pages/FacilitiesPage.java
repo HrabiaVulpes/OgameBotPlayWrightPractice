@@ -12,6 +12,7 @@ public class FacilitiesPage extends GamePage{
     }
 
     public FacilitiesPage collectFacilitiesBuildingLevels(){
+        GameDataSingleton.buildingLevels.clear();
         GameDataSingleton.buildingLevels.put("roboticsFactory", Integer.parseInt(page.locator("span.roboticsFactory > span.level > span").first().textContent()));
         GameDataSingleton.buildingLevels.put("shipyard", Integer.parseInt(page.locator("span.shipyard > span.level > span").first().textContent()));
         GameDataSingleton.buildingLevels.put("researchLaboratory", Integer.parseInt(page.locator("span.researchLaboratory > span.level > span").first().textContent()));

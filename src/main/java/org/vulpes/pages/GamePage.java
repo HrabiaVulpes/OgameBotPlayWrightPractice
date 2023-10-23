@@ -9,6 +9,11 @@ public class GamePage extends BasePage{
         super(page);
     }
 
+    public OverviewPage openOverview(){
+        page.getByText("Podgląd").click();
+        return new OverviewPage(page);
+    }
+
     public ResourcesPage openResources(){
         page.getByText("Surowce").click();
         return new ResourcesPage(page);
