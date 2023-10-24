@@ -69,6 +69,8 @@ public class FleetPage extends GamePage {
             fsp.useCoordinates(2, 425, 16)
                     .pickMission("Ekspedycja")
                     .send();
+
+            System.out.println("Expedition sent!");
         }
         return this;
     }

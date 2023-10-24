@@ -15,7 +15,7 @@ public class GamePage extends BasePage{
     }
 
     public ResourcesPage openResources(){
-        page.getByText("Surowce").click();
+        page.getByText("Surowce").and(page.locator("span.textlabel")).click();
         return new ResourcesPage(page);
     }
 
@@ -25,7 +25,7 @@ public class GamePage extends BasePage{
     }
 
     public FacilitiesPage openFacilities(){
-        page.getByText("Stacja").click();
+        page.getByText("Stacja").and(page.locator("span.textlabel")).click();
         return new FacilitiesPage(page);
     }
 

@@ -31,17 +31,14 @@ public class DefencesPage extends GamePage {
     }
 
     public List<String> listBuildable() {
-        return page.locator("li.technology").all()
-                .stream()
-                .filter(element -> element.getAttribute("data-status").equals("on"))
-                .map(element -> {
-                    String[] classes = element.locator("span.icon").first().getAttribute("class").split(" ");
-                    return classes[classes.length - 1];
-                })
-                .collect(Collectors.toList());
+        return page.locator("li.technology").all().stream().filter(element -> element.getAttribute("data-status").equals("on")).map(element -> {
+            String[] classes = element.locator("span.icon").first().getAttribute("class").split(" ");
+            return classes[classes.length - 1];
+        }).collect(Collectors.toList());
     }
 
     public DefencesPage buildDefence(String name) {
+        System.out.println(name + " joins defences!");
         page.locator("li." + name).click();
         page.locator("div.build-it_wrap button.upgrade").click();
         return this;
@@ -61,45 +58,16 @@ public class DefencesPage extends GamePage {
             expected.put("gaussCannon", plasmas * 5);
             expected.put("ionCannon", plasmas * 15);
 
-            if (defencesCounts.get("shieldDomeLarge") == 0 && options.contains("shieldDomeLarge")){
-                buildDefence("shieldDomeLarge");
-                return this;
-            }
-            if (defencesCounts.get("shieldDomeSmall") == 0 && options.contains("shieldDomeSmall")){
-                buildDefence("shieldDomeSmall");
-                return this;
-            }
-            if (options.contains("missileInterceptor")){
-                buildDefence("missileInterceptor");
-                return this;
-            }
-            if (defencesCounts.get("plasmaCannon") < expected.get("plasmaCannon") && options.contains("plasmaCannon")){
-                buildDefence("plasmaCannon");
-                return this;
-            }
-            if (defencesCounts.get("gaussCannon") < expected.get("gaussCannon") && options.contains("gaussCannon")){
-                buildDefence("gaussCannon");
-                return this;
-            }
-            if (defencesCounts.get("ionCannon") < expected.get("ionCannon") && options.contains("ionCannon")){
-                buildDefence("ionCannon");
-                return this;
-            }
-            if (defencesCounts.get("laserCannonHeavy") < expected.get("laserCannonHeavy") && options.contains("laserCannonHeavy")){
-                buildDefence("laserCannonHeavy");
-                return this;
-            }
-            if (defencesCounts.get("laserCannonLight") < expected.get("laserCannonLight") && options.contains("laserCannonLight")){
-                buildDefence("laserCannonLight");
-                return this;
-            }
-            if (defencesCounts.get("rocketLauncher") < expected.get("rocketLauncher") && options.contains("rocketLauncher")){
-                buildDefence("rocketLauncher");
-                return this;
-            }
-            if (options.contains("plasmaCannon"))
-                buildDefence("plasmaCannon");
-
+            if (defencesCounts.get("shieldDomeLarge") == 0 && options.contains("shieldDomeLarge")) return buildDefence("shieldDomeLarge");
+            if (defencesCounts.get("shieldDomeSmall") == 0 && options.contains("shieldDomeSmall")) return buildDefence("shieldDomeSmall");
+            if (options.contains("missileInterceptor")) return buildDefence("missileInterceptor");
+            if (defencesCounts.get("plasmaCannon") < expected.get("plasmaCannon") && options.contains("plasmaCannon")) return buildDefence("plasmaCannon");
+            if (defencesCounts.get("gaussCannon") < expected.get("gaussCannon") && options.contains("gaussCannon")) return buildDefence("gaussCannon");
+            if (defencesCounts.get("ionCannon") < expected.get("ionCannon") && options.contains("ionCannon")) return buildDefence("ionCannon");
+            if (defencesCounts.get("laserCannonHeavy") < expected.get("laserCannonHeavy") && options.contains("laserCannonHeavy")) return buildDefence("laserCannonHeavy");
+            if (defencesCounts.get("laserCannonLight") < expected.get("laserCannonLight") && options.contains("laserCannonLight")) return buildDefence("laserCannonLight");
+            if (defencesCounts.get("rocketLauncher") < expected.get("rocketLauncher") && options.contains("rocketLauncher")) return buildDefence("rocketLauncher");
+            if (options.contains("plasmaCannon")) return buildDefence("plasmaCannon");
         }
         return this;
     }

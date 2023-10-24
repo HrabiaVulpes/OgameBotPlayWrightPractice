@@ -50,6 +50,7 @@ public class ResearchPage extends GamePage {
     }
 
     public ResearchPage upgradeResearch(String name) {
+        System.out.println("Researching: " + name);
         page.locator("span." + name + " > button.upgrade").click();
         return this;
     }

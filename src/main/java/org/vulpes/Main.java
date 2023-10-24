@@ -14,7 +14,7 @@ public class Main {
     public static void main(String[] args) throws InterruptedException {
         while (true) {
             try (Playwright playwright = Playwright.create()) {
-                Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false).setSlowMo(100));
+                Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(true).setSlowMo(100));
                 Page page = browser.newPage();
                 EntryPage entryPage = new EntryPage(page);
                 OverviewPage current = entryPage.open()
@@ -31,9 +31,13 @@ public class Main {
                         .collectResourceData()
                         .openOverview();
 
+                if (!current.isConstructing())
+                    current.openResources().constructNeeded().openOverview();
+                if (!current.isConstructing())
+                    current.openFacilities().constructNeeded().openOverview();
                 if (!current.isResearching())
                     current.openResearch().upgradeLowestUsable().openOverview();
-                if (!current.isConstructing())
+                if (!current.isProducing())
                     current.openDefences().constructNeeded().openOverview();
 
                 System.out.println("Builds? " + current.isConstructing());
@@ -44,7 +48,7 @@ public class Main {
                 System.out.println("Resources are: " + GameDataSingleton.metal + " " + GameDataSingleton.crystal + " " + GameDataSingleton.deuter);
             }
 
-            Thread.sleep(1000 * 60 * 15);
+            Thread.sleep(1000 * 60 * 5);
         }
     }
 }
