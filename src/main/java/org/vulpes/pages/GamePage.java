@@ -1,7 +1,10 @@
 package org.vulpes.pages;
 
+import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import org.vulpes.game.GameDataSingleton;
+
+import java.util.List;
 
 public class GamePage extends BasePage{
 
@@ -77,6 +80,10 @@ public class GamePage extends BasePage{
     public GamePage openShop(){
         page.getByText("Sklep").click();
         return this;
+    }
+
+    public List<Locator> getPlanetList(){
+        return page.locator("#planetList > div.smallplanet").all();
     }
 
     public GamePage collectResourceData(){

@@ -60,9 +60,11 @@ public class ResourcesPage extends GamePage {
                 int deute = buildingLevels.get("deuteriumSynthesizer");
                 int lowest = Math.min(metal, Math.min(cryst, deute));
 
-                if (metal == lowest && options.contains("metalMine")) return upgradeBuilding("metalMine");
-                if (cryst == lowest && options.contains("crystalMine")) return upgradeBuilding("crystalMine");
-                if (deute == lowest && options.contains("deuteriumSynthesizer")) return upgradeBuilding("deuteriumSynthesizer");
+                if (lowest < 23) {
+                    if (metal == lowest && options.contains("metalMine")) return upgradeBuilding("metalMine");
+                    if (cryst == lowest && options.contains("crystalMine")) return upgradeBuilding("crystalMine");
+                    if (deute == lowest && options.contains("deuteriumSynthesizer")) return upgradeBuilding("deuteriumSynthesizer");
+                }
             }
 
             if (buildingLevels.get("metalStorage") < 10 && options.contains("metalStorage")) return upgradeBuilding("metalStorage");

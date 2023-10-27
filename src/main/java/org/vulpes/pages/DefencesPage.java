@@ -44,6 +44,14 @@ public class DefencesPage extends GamePage {
         return this;
     }
 
+    public DefencesPage buildDefence(String name, Integer amount) {
+        System.out.println(name + " joins defences!");
+        page.locator("li." + name).click();
+        page.locator("#build_amount").fill(amount.toString());
+        page.locator("div.build-it_wrap button.upgrade").click();
+        return this;
+    }
+
     public DefencesPage constructNeeded() {
         collectDefencesCounts();
         List<String> options = listBuildable();
@@ -62,11 +70,11 @@ public class DefencesPage extends GamePage {
             if (defencesCounts.get("shieldDomeSmall") == 0 && options.contains("shieldDomeSmall")) return buildDefence("shieldDomeSmall");
             if (options.contains("missileInterceptor")) return buildDefence("missileInterceptor");
             if (defencesCounts.get("plasmaCannon") < expected.get("plasmaCannon") && options.contains("plasmaCannon")) return buildDefence("plasmaCannon");
-            if (defencesCounts.get("gaussCannon") < expected.get("gaussCannon") && options.contains("gaussCannon")) return buildDefence("gaussCannon");
-            if (defencesCounts.get("ionCannon") < expected.get("ionCannon") && options.contains("ionCannon")) return buildDefence("ionCannon");
-            if (defencesCounts.get("laserCannonHeavy") < expected.get("laserCannonHeavy") && options.contains("laserCannonHeavy")) return buildDefence("laserCannonHeavy");
-            if (defencesCounts.get("laserCannonLight") < expected.get("laserCannonLight") && options.contains("laserCannonLight")) return buildDefence("laserCannonLight");
-            if (defencesCounts.get("rocketLauncher") < expected.get("rocketLauncher") && options.contains("rocketLauncher")) return buildDefence("rocketLauncher");
+            if (defencesCounts.get("gaussCannon") < expected.get("gaussCannon") && options.contains("gaussCannon")) return buildDefence("gaussCannon", 2);
+            if (defencesCounts.get("ionCannon") < expected.get("ionCannon") && options.contains("ionCannon")) return buildDefence("ionCannon", 4);
+            if (defencesCounts.get("laserCannonHeavy") < expected.get("laserCannonHeavy") && options.contains("laserCannonHeavy")) return buildDefence("laserCannonHeavy", 8);
+            if (defencesCounts.get("laserCannonLight") < expected.get("laserCannonLight") && options.contains("laserCannonLight")) return buildDefence("laserCannonLight", 16);
+            if (defencesCounts.get("rocketLauncher") < expected.get("rocketLauncher") && options.contains("rocketLauncher")) return buildDefence("rocketLauncher", 32);
             if (options.contains("plasmaCannon")) return buildDefence("plasmaCannon");
         }
         return this;
