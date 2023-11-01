@@ -12,7 +12,7 @@ public class Main {
         while (true) {
             System.out.println("------WAKING UP----------------------------");
             try (Playwright playwright = Playwright.create()) {
-                Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(true).setSlowMo(50));
+                Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(true).setSlowMo(100));
                 Page page = browser.newPage();
                 EntryPage entryPage = new EntryPage(page);
                 OverviewPage current = entryPage.open()
@@ -29,7 +29,6 @@ public class Main {
                         .collectResourceData()
                         .openOverview();
 
-                while (current.getPlanetList().isEmpty()){}
                 System.out.println("We have : " + current.getPlanetList().size() + " planets!");
                 for (Locator planet : current.getPlanetList()) {
                     planet.click();
