@@ -49,6 +49,7 @@ public class Main {
                 }
             }catch (Exception e){
                 System.out.println("------FUCKING------------------------------");
+                e.printStackTrace();
             }
             System.out.println("------SLEEPING-----------------------------");
             Thread.sleep(1000 * 60 * 5);

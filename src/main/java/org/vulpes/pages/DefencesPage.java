@@ -16,16 +16,16 @@ public class DefencesPage extends GamePage {
 
     public DefencesPage collectDefencesCounts() {
         defencesCounts.clear();
-        defencesCounts.put("rocketLauncher", Integer.parseInt(page.locator("span.rocketLauncher > span.amount").first().textContent()));
-        defencesCounts.put("laserCannonLight", Integer.parseInt(page.locator("span.laserCannonLight > span.amount").first().textContent()));
-        defencesCounts.put("laserCannonHeavy", Integer.parseInt(page.locator("span.laserCannonHeavy > span.amount").first().textContent()));
-        defencesCounts.put("gaussCannon", Integer.parseInt(page.locator("span.gaussCannon > span.amount").first().textContent()));
-        defencesCounts.put("ionCannon", Integer.parseInt(page.locator("span.ionCannon > span.amount").first().textContent()));
-        defencesCounts.put("plasmaCannon", Integer.parseInt(page.locator("span.plasmaCannon > span.amount").first().textContent()));
-        defencesCounts.put("shieldDomeSmall", Integer.parseInt(page.locator("span.shieldDomeSmall > span.amount").first().textContent()));
-        defencesCounts.put("shieldDomeLarge", Integer.parseInt(page.locator("span.shieldDomeLarge > span.amount").first().textContent()));
-        defencesCounts.put("missileInterceptor", Integer.parseInt(page.locator("span.missileInterceptor > span.amount").first().textContent()));
-        defencesCounts.put("missileInterplanetary", Integer.parseInt(page.locator("span.missileInterplanetary > span.amount").first().textContent()));
+        defencesCounts.put("rocketLauncher", Integer.parseInt(page.locator("span.rocketLauncher > span.amount").first().getAttribute("data-value")));
+        defencesCounts.put("laserCannonLight", Integer.parseInt(page.locator("span.laserCannonLight > span.amount").first().getAttribute("data-value")));
+        defencesCounts.put("laserCannonHeavy", Integer.parseInt(page.locator("span.laserCannonHeavy > span.amount").first().getAttribute("data-value")));
+        defencesCounts.put("gaussCannon", Integer.parseInt(page.locator("span.gaussCannon > span.amount").first().getAttribute("data-value")));
+        defencesCounts.put("ionCannon", Integer.parseInt(page.locator("span.ionCannon > span.amount").first().getAttribute("data-value")));
+        defencesCounts.put("plasmaCannon", Integer.parseInt(page.locator("span.plasmaCannon > span.amount").first().getAttribute("data-value")));
+        defencesCounts.put("shieldDomeSmall", Integer.parseInt(page.locator("span.shieldDomeSmall > span.amount").first().getAttribute("data-value")));
+        defencesCounts.put("shieldDomeLarge", Integer.parseInt(page.locator("span.shieldDomeLarge > span.amount").first().getAttribute("data-value")));
+        defencesCounts.put("missileInterceptor", Integer.parseInt(page.locator("span.missileInterceptor > span.amount").first().getAttribute("data-value")));
+        defencesCounts.put("missileInterplanetary", Integer.parseInt(page.locator("span.missileInterplanetary > span.amount").first().getAttribute("data-value")));
 
         return this;
     }
