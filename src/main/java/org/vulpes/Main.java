@@ -29,6 +29,8 @@ public class Main {
                         .collectResourceData()
                         .openOverview();
 
+                while (current.getPlanetList().isEmpty()){}
+                System.out.println("We have : " + current.getPlanetList().size() + " planets!");
                 for (Locator planet : current.getPlanetList()) {
                     planet.click();
 

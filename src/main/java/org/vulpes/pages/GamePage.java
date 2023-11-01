@@ -83,6 +83,7 @@ public class GamePage extends BasePage{
     }
 
     public List<Locator> getPlanetList(){
+        page.locator("#planetList > div.smallplanet").first().hover();
         return page.locator("#planetList > div.smallplanet").all();
     }
 
