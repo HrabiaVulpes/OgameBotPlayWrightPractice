@@ -1,4 +1,4 @@
-package org.vulpes.pages;
+package org.vulpes.ogame.pages;
 
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;

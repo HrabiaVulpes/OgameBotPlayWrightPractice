@@ -1,7 +1,7 @@
-package org.vulpes.pages;
+package org.vulpes.ogame.pages;
 
 import com.microsoft.playwright.Page;
-import org.vulpes.game.GameDataSingleton;
+import org.vulpes.ogame.game.GameDataSingleton;
 
 public class FleetPage extends GamePage {
     public FleetPage(Page page) {

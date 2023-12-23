@@ -1,8 +1,8 @@
-package org.vulpes.pages;
+package org.vulpes.ogame.pages;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
-import org.vulpes.game.GameDataSingleton;
+import org.vulpes.ogame.game.GameDataSingleton;
 
 import java.util.List;
 

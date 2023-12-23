@@ -1,4 +1,4 @@
-package org.vulpes.game;
+package org.vulpes.ogame.game;
 
 import java.util.HashMap;
 import java.util.Map;
