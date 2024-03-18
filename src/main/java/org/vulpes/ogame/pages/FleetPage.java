@@ -76,8 +76,10 @@ public class FleetPage extends GamePage {
     }
 
     public FleetPage sendAllExpeditions() {
-        for (int i = GameDataSingleton.expeditionsActive; i < GameDataSingleton.maxExpeditionsActive; i++)
-            sendExpedition();
+        if (GameDataSingleton.techLevels.get("astrophysicsTechnology") > 0) {
+            for (int i = GameDataSingleton.expeditionsActive; i < GameDataSingleton.maxExpeditionsActive; i++)
+                sendExpedition();
+        }
         return this;
     }
 }

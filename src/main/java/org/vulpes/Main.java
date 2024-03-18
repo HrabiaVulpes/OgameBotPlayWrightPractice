@@ -1,6 +1,6 @@
 package org.vulpes;
 
-import org.vulpes.howrse.Bot;
+import org.vulpes.ogame.Bot;
 
 public class Main {
     public static void main(String[] args) throws InterruptedException {

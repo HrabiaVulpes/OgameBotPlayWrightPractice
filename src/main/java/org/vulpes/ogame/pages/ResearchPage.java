@@ -1,8 +1,8 @@
 package org.vulpes.ogame.pages;
 
 import com.microsoft.playwright.Page;
-import org.vulpes.ogame.game.PlayerSettingsSingleton;
 import org.vulpes.ogame.game.GameDataSingleton;
+import org.vulpes.ogame.game.PlayerSettingsSingleton;
 
 import java.util.Comparator;
 import java.util.List;
@@ -12,6 +12,8 @@ public class ResearchPage extends GamePage {
     public ResearchPage(Page page) {
         super(page);
     }
+
+    List<String> options;
 
     public ResearchPage collectResearchLevels() {
         GameDataSingleton.techLevels.clear();
@@ -54,20 +56,55 @@ public class ResearchPage extends GamePage {
         return this;
     }
 
+    public void upgradeIfPossibleAndBelow(String tech, Integer level){
+        if (options.contains(tech) && GameDataSingleton.techLevels.get(tech) < level) {
+            upgradeResearch(tech);
+            options.clear();
+        }
+    }
+
     public ResearchPage upgradeLowestUsable() {
         collectResearchLevels();
-        List<String> options = listUpgradeable();
+        options = listUpgradeable();
+
+        if (PlayerSettingsSingleton.explorer) {
+            upgradeIfPossibleAndBelow("astrophysicsTechnology", 1);
+            upgradeIfPossibleAndBelow("impulseDriveTechnology", 3);
+            upgradeIfPossibleAndBelow("espionageTechnology", 4);
+            upgradeIfPossibleAndBelow("espionageTechnology", 5);
+            upgradeIfPossibleAndBelow("energyTechnology", 5);
+            upgradeIfPossibleAndBelow("hyperspaceTechnology", 3);
+            upgradeIfPossibleAndBelow("hyperspaceDriveTechnology", 2);
+
+        }
+
+        if (PlayerSettingsSingleton.fleeter){
+            upgradeIfPossibleAndBelow("combustionDriveTechnology", 1);
+            upgradeIfPossibleAndBelow("impulseDriveTechnology", 2);
+            upgradeIfPossibleAndBelow("armorTechnology", 2);
+            upgradeIfPossibleAndBelow("impulseDriveTechnology", 4);
+            upgradeIfPossibleAndBelow("ionTechnology", 2);
+            upgradeIfPossibleAndBelow("hyperspaceTechnology", 5);
+            upgradeIfPossibleAndBelow("hyperspaceDriveTechnology", 4);
+            upgradeIfPossibleAndBelow("laserTechnology", 12);
+            upgradeIfPossibleAndBelow("plasmaTechnology", 5);
+            upgradeIfPossibleAndBelow("impulseDriveTechnology", 6);
+            upgradeIfPossibleAndBelow("hyperspaceDriveTechnology", 6);
+        }
+
         if (GameDataSingleton.techLevels.get("laserTechnology") >= 12) options.remove("laserTechnology");
         if (GameDataSingleton.techLevels.get("ionTechnology") >= 25) options.remove("ionTechnology");
         if (GameDataSingleton.techLevels.get("gravitonTechnology") >= 1) options.remove("gravitonTechnology");
+
         if (!PlayerSettingsSingleton.fleeter) {
             options = options.stream()
                     .filter(tech -> !tech.contains("Drive"))
                     .collect(Collectors.toList());
         }
+
         if (!options.isEmpty()) {
             options.sort(Comparator.comparing(a -> GameDataSingleton.techLevels.get(a)));
-            upgradeResearch(options.get(0));
+            return upgradeResearch(options.get(0));
         }
         return this;
     }

@@ -28,6 +28,7 @@ public class HorseProcessor {
     private final Locator trainingButtons;
     private final Locator trainingSlider;
     private final Locator trainingData;
+    private final Locator name;
 
     public HorseProcessor(Page page) {
         this.page = page;
@@ -61,6 +62,8 @@ public class HorseProcessor {
         this.trainingButtons = page.locator("table.training-table-summary").locator("td.last").locator("button");
         this.trainingSlider = page.locator("#training-wrapper").locator("li.green");
         this.trainingData = page.locator("#training-wrapper").locator("ul.spacer-small-bottom").locator("li");
+
+        this.name = page.locator("h1.horse-name");
     }
 
     public Boolean standardRoutine() {
@@ -74,16 +77,24 @@ public class HorseProcessor {
 
         if (page.getByText("Uwaga: jeden z Twoich koni ma niedowagę, musisz mu podać następującą ilość paszy: 20, aby wrócił do formy!").isVisible())
             haySlider.locator("li :text('20')").first().click();
-        else haySlider.locator("li :text('" + hayNeed.textContent().trim() + "')").first().click();
+        else if (page.getByText("Uwaga: Twoja klacz ma niedowagę, musisz jej podać następującą ilość paszy: 20, aby wróciła do formy!").isVisible())
+            haySlider.locator("li :text('20')").first().click();
+        else
+            haySlider.locator("li :text('" + hayNeed.textContent().trim() + "')").first().click();
         oatSlider.locator("li :text('" + oatNeed.textContent().trim() + "')").first().click();
-        page.getByText("Nakarm").click();
+        page.locator("#feed-button").click();
 
         clickIfEnabled(sleep);
         return true;
     }
 
-    public void goNextHorse() {
+    public boolean goNextHorse() {
         clickIfEnabled(nextHorse);
+        return !name.textContent().contains("Achilles");
+    }
+
+    public String getName(){
+        return name.textContent();
     }
 
     private void clickIfEnabled(Locator locator) {

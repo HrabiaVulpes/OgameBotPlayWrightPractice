@@ -11,7 +11,7 @@ public class Bot {
         while (true) {
             System.out.println("------WAKING UP----------------------------");
             try (Playwright playwright = Playwright.create()) {
-                Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(true).setSlowMo(100));
+                Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false).setSlowMo(100));
                 Page page = browser.newPage();
                 EntryPage entryPage = new EntryPage(page);
                 OverviewPage current = entryPage.open()
@@ -22,6 +22,8 @@ public class Bot {
                         .clickLoginButton()
                         .openLastPlayed()
                         .collectResourceData()
+                        .openResearch()
+                        .collectResearchLevels()
                         .openFleet()
                         .collectFleetNumbers()
                         .sendAllExpeditions()
@@ -45,6 +47,7 @@ public class Bot {
                     if (!current.isProducing())
                         current.openDefences().constructNeeded().openOverview();
 
+                    current.collectResourceData();
                     System.out.println("Resources are: " + GameDataSingleton.metal + " " + GameDataSingleton.crystal + " " + GameDataSingleton.deuter);
                 }
             }catch (Exception e){
